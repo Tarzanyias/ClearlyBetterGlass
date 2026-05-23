@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Clearly Better Glass | Premium Window Cleaning & Pressure Washing</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/favicon.png">
+  <link rel="shortcut icon" href="Images/favicon.png">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7fc',
+              100: '#e0eff9',
+              500: '#0084c2',
+              600: '#015e8c',
+              700: '#014c72',
+              900: '#02334d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* FAQ Sidebar transition */
+    .faq-sidebar {
+      transition: transform 0.3s ease-in-out;
+      transform: translateX(100%);
+    }
+    .faq-sidebar.open {
+      transform: translateX(0);
+    }
+    /* Custom scroll for sidebar */
+    .faq-sidebar-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .faq-sidebar-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .faq-sidebar-content::-webkit-scrollbar-thumb {
+      background: #015e8c;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased pb-12">
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 left-5 z-50 max-w-sm bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-blue-500/30 flex items-center space-x-3 hidden transition-all duration-300 transform translate-y-10 opacity-0">
+    <div class="bg-brand-500 text-white p-1.5 rounded-full shrink-0">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    </div>
+    <p id="toast-message" class="text-sm font-semibold"></p>
+  </div>
+
+  <!-- TOP PROMOTIONAL BAR -->
+  <div id="promo-banner" class="bg-brand-900 text-brand-100 text-xs sm:text-sm py-2.5 px-8 text-center font-medium relative z-40 flex items-center justify-center border-b border-brand-700/40">
+    <div class="max-w-7xl mx-auto pr-6">
+      ✨ Save 15% to 20% with our multi-season Clean-Maintenance Programs. 
+      <button onclick="scrollToSection('pricing')" class="underline decoration-sky-300 font-bold hover:text-sky-300 transition duration-150">
+        Check Estimator Below
+      </button>
+    </div>
+    <button onclick="closePromoBanner()" class="absolute right-3 top-1/2 -translate-y-1/2 text-brand-200 hover:text-white p-1 rounded-full transition duration-150 focus:outline-none" aria-label="Close Announcement">
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- HEADER & STICKY NAVIGATION -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between py-4">
+      
+      <!-- Logo Brand - USING IMAGE -->
+      <div onclick="scrollToSection('home')" class="flex items-center space-x-2 cursor-pointer group">
+        <img src="Images/logo.png" alt="Clearly Better Glass Logo" class="h-10 w-auto object-contain group-hover:scale-105 transition-all duration-300" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23015e8c%22%3E%3Cpath d=%22M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z%22/%3E%3C/svg%3E';">
+        <div>
+          <span class="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+            Clearly Better Glass<span class="text-sm align-super font-medium">™</span>
+          </span>
+          <p class="text-[9px] tracking-widest text-slate-400 uppercase font-black -mt-1">Window Cleaning</p>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <button onclick="scrollToSection('services')" class="font-bold text-slate-600 hover:text-brand-600 transition">Our Process</button>
+        <button onclick="scrollToSection('why-us')" class="font-bold text-slate-600 hover:text-brand-600 transition">Why Clearly Better</button>
+        <button onclick="scrollToSection('pricing')" class="font-bold text-slate-600 hover:text-brand-600 transition">Pricing Calculator</button>
+        <button onclick="scrollToSection('faq')" class="font-bold text-slate-600 hover:text-brand-600 transition">FAQ</button>
+      </nav>
+
+      <!-- Contact Actions -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <a href="tel:8328889584" class="flex items-center text-slate-700 hover:text-brand-600 transition font-black text-base">
+          <svg class="h-5 w-5 text-brand-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          832-888-9584
+        </a>
+        <button onclick="scrollToSection('pricing')" class="bg-brand-600 hover:bg-brand-700 text-white font-extrabold px-6 py-3 rounded-full shadow-lg shadow-brand-600/25 transition-all duration-200 transform hover:-translate-y-0.5">
+          Get Free Quote
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Toggle Menu">
+        <svg id="menu-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Panel -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-xl px-4 py-6 space-y-4">
+      <button onclick="scrollToSection('services')" class="block w-full text-left font-bold text-slate-700 py-2 hover:text-brand-600 border-b border-slate-50">Our Process</button>
+      <button onclick="scrollToSection('why-us')" class="block w-full text-left font-bold text-slate-700 py-2 hover:text-brand-600 border-b border-slate-50">Why Clearly Better</button>
+      <button onclick="scrollToSection('pricing')" class="block w-full text-left font-bold text-slate-700 py-2 hover:text-brand-600 border-b border-slate-50">Estimate Calculator</button>
+      <button onclick="scrollToSection('faq')" class="block w-full text-left font-bold text-slate-700 py-2 hover:text-brand-600 border-b border-slate-50">FAQ</button>
+      <div class="pt-4 flex flex-col space-y-3">
+        <a href="tel:8328889584" class="flex items-center justify-center bg-slate-50 p-3 rounded-xl font-bold text-slate-800">
+          <svg class="h-5 w-5 text-brand-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          832-888-9584
+        </a>
+        <button onclick="scrollToSection('pricing')" class="w-full bg-brand-600 text-white font-bold py-3 rounded-full shadow-lg text-center">
+          Instant Free Quote
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative bg-brand-600 text-white overflow-hidden py-16 sm:py-24 text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <a href="tel:8328889584" class="inline-block text-2xl sm:text-4xl font-extrabold tracking-wide hover:text-sky-200 transition duration-150">832-888-9584</a>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight max-w-3xl mx-auto">Window & Pressure Washing Experts</h1>
+      <hr class="w-full max-w-xl mx-auto border-white/30" />
+      <p class="text-lg sm:text-xl text-brand-100 max-w-2xl mx-auto leading-relaxed font-light">Experience the Clearly Better standard: crystal-clear glass, spotless siding, and zero residue. Premium filtered water system.</p>
+      <div class="pt-4 flex justify-center"><a href="tel:8328889584" class="inline-flex items-center justify-center space-x-3 bg-white hover:bg-brand-50 text-slate-900 font-black text-lg sm:text-xl px-10 py-5 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105"><svg class="h-6 w-6 text-brand-600 animate-pulse shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg><span>Call Us at 832-888-9584</span></a></div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS SECTION -->
+  <section class="py-12 bg-brand-700 text-white border-t border-brand-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-brand-900/40 border border-white/10 p-5 rounded-2xl flex items-start space-x-3"><div class="bg-brand-500 p-2 rounded-xl"><svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div><div><h4 class="font-extrabold">Filtered Water</h4><p class="text-xs text-brand-200">Pure mineral‑free system for natural drying.</p></div></div>
+      <div class="bg-brand-900/40 border border-white/10 p-5 rounded-2xl flex items-start space-x-3"><div class="bg-brand-500 p-2 rounded-xl"><svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><div><h4 class="font-extrabold">Hourly Late Credit</h4><p class="text-xs text-brand-200">$35 off per hour late – we respect your time.</p></div></div>
+      <div class="bg-brand-900/40 border border-white/10 p-5 rounded-2xl flex items-start space-x-3"><div class="bg-brand-500 p-2 rounded-xl"><svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></div><div><h4 class="font-extrabold">Multi-Stage Filtration</h4><p class="text-xs text-brand-200">Carbon + physical filters = chemical‑free clean.</p></div></div>
+      <div class="bg-brand-900/40 border border-white/10 p-5 rounded-2xl flex items-start space-x-3"><div class="bg-brand-500 p-2 rounded-xl"><svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div><div><h4 class="font-extrabold">Zero-Residue Standard</h4><p class="text-xs text-brand-200">No soap films = glass stays cleaner longer.</p></div></div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS SECTION (SVG replaced emojis) -->
+  <section id="services" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="text-brand-600 font-bold text-xs tracking-widest uppercase bg-brand-50 px-3 py-1.5 rounded-full">Our Rigorous Process</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight">Our Signature 4-Step Standard</h2>
+        <p class="text-slate-600 font-medium">Every Clearly Better Glass service follows an airtight system to guarantee every window pane, frame, and screen is perfectly clear.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-brand-600 text-white rounded-2xl p-6 relative shadow-xl"><span class="absolute top-4 right-4 text-3xl font-black text-brand-500">01</span><div class="bg-white text-brand-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg"><svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 6L5 18M15 6H5v10M20 12h-4M17 6v4" /></svg></div><h3 class="text-lg font-bold mb-2 font-serif">Filtered Pressure Wash</h3><p class="text-brand-100 text-sm">High-pressure pure water blasts dirt, pollen, and grime safely.</p></div>
+        <div class="bg-brand-600 text-white rounded-2xl p-6 relative shadow-xl"><span class="absolute top-4 right-4 text-3xl font-black text-brand-500">02</span><div class="bg-white text-brand-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg"><svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4zM8 8h8v8H8z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8" /></svg></div><h3 class="text-lg font-bold mb-2 font-serif">Frame Pressure Rinse</h3><p class="text-brand-100 text-sm">Precision wash to outer frames and sills eliminating built‑up residue.</p></div>
+        <div class="bg-brand-600 text-white rounded-2xl p-6 relative shadow-xl"><span class="absolute top-4 right-4 text-3xl font-black text-brand-500">03</span><div class="bg-white text-brand-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg"><svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18v18H3zM7 7h10v10H7z" /><circle cx="12" cy="12" r="2" /></svg></div><h3 class="text-lg font-bold mb-2 font-serif">Screen Washing</h3><p class="text-brand-100 text-sm">Mesh scrubbed & rinsed so no dust blows back onto clean glass.</p></div>
+        <div class="bg-brand-600 text-white rounded-2xl p-6 relative shadow-xl"><span class="absolute top-4 right-4 text-3xl font-black text-brand-500">04</span><div class="bg-white text-brand-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg"><svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 12h14" /></svg></div><h3 class="text-lg font-bold mb-2 font-serif">Pane Polish & Track Detail</h3><p class="text-brand-100 text-sm">Invisible shine + vacuumed tracks for a flawless finish.</p></div>
+      </div>
+      <div class="mt-16 bg-gradient-to-r from-blue-900 to-indigo-950 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden"><div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div><div class="relative z-10 grid md:grid-cols-2 gap-8 items-center"><div><span class="text-xs font-bold tracking-widest text-sky-400 uppercase">The ClearMax Advantage</span><h3 class="text-2xl sm:text-3xl font-black mt-2">Our Zero‑Residue Standard</h3><p class="text-slate-300 text-sm mt-4">Most cleaners use tap water & detergents that leave micro‑film attracting dirt. Our filtered water system bonds with glass contaminants naturally, leaving a perfectly clear, spot‑free finish that stays cleaner twice as long.</p></div><div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10"><h4 class="font-bold">Filtered Water vs. Tap Water</h4><div class="mt-2"><div class="flex justify-between text-xs"><span>Tap Water Minerals:</span><span>150-300+ PPM</span></div><div class="w-full bg-white/20 rounded-full h-2 mt-1"><div class="bg-red-400 h-2 rounded-full w-[85%]"></div></div></div><div class="mt-3"><div class="flex justify-between text-xs"><span>Clearly Better™ Filtered:</span><span>Near 0 PPM</span></div><div class="w-full bg-white/20 rounded-full h-2 mt-1"><div class="bg-sky-400 h-2 rounded-full w-[8%]"></div></div></div><div class="border-t border-white/10 mt-4 pt-3 text-xs italic">“No streaks, no white spots — just pure clarity.”</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- DIRECT COMPARISON SECTION -->
+  <section id="why-us" class="py-20 bg-slate-50 border-t border-slate-100"><div class="max-w-7xl mx-auto px-4"><div class="text-center max-w-3xl mx-auto mb-16"><span class="text-brand-600 font-bold text-xs tracking-widest uppercase bg-brand-50 px-3 py-1.5 rounded-full">Proven Standards</span><h2 class="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight mt-4">Direct Comparison</h2><p class="text-slate-600">See how we outperform DIY and traditional bucket cleaners.</p></div><div class="bg-brand-600 text-white rounded-3xl overflow-hidden shadow-2xl"><div class="p-6 sm:p-8 bg-brand-900 border-b border-white/10"><h3 class="font-bold text-xl font-serif">Service Transparency</h3><p class="text-xs text-brand-200">Clearly Better Glass vs competitors</p></div><div class="overflow-x-auto"><table class="w-full text-left border-collapse"><thead><tr class="bg-brand-700/60 border-b border-white/10"><th class="p-4 text-xs font-bold">Service Deliverable</th><th class="p-4 text-xs font-bold text-sky-300 bg-brand-900/40">Clearly Better Glass Crew</th><th class="p-4 text-xs font-bold text-brand-300">Bucket & Soap</th><th class="p-4 text-xs font-bold text-brand-300">DIY Spray</th></tr></thead><tbody class="divide-y divide-white/10 text-sm"><tr><td class="p-4 font-bold">Water Purity</td><td class="p-4 text-emerald-300 font-bold bg-brand-900/20">Purified (0 PPM)</td><td class="p-4">Tap Water (300+ PPM)</td><td class="p-4">Tap Water</td></tr><tr><td class="p-4 font-bold">Residue Protection</td><td class="p-4 text-emerald-300 font-bold bg-brand-900/20">Yes (Film‑Free)</td><td class="p-4">Soap Microfilm</td><td class="p-4">Chemical Haze</td></tr><tr><td class="p-4 font-bold">Sill Cleaning</td><td class="p-4 text-emerald-300 font-bold bg-brand-900/20">Included</td><td class="p-4">Extra Charge</td><td class="p-4">Missed</td></tr><tr><td class="p-4 font-bold">Liability Insurance</td><td class="p-4 text-emerald-300 font-bold bg-brand-900/20">$2M Coverage</td><td class="p-4">Uninsured</td><td class="p-4">Personal Risk</td></tr></tbody></table></div></div></div></section>
+
+  <!-- PRICING ESTIMATOR -->
+  <section id="pricing" class="py-20 bg-white"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid lg:grid-cols-12 gap-12 items-start"><div class="lg:col-span-5 space-y-6"><span class="text-brand-600 font-bold text-xs uppercase bg-brand-50 px-3 py-1.5 rounded-full">Transparent Pricing</span><h2 class="text-3xl sm:text-4xl font-serif font-bold">Instant Estimator</h2><p class="text-slate-600">Adjust sliders for a real‑time flat‑rate estimate. No surprise fees.</p><div class="bg-slate-50 border rounded-2xl p-5"><h4 class="font-bold">What's included?</h4><ul class="mt-2 space-y-1 text-xs"><li>✓ Mineral‑free scrubbing</li><li>✓ Exterior frame wipe down</li><li>✓ Hard water spot treatment</li><li>✓ Streak‑free polish</li></ul></div></div><div class="lg:col-span-7 bg-brand-600 text-white rounded-3xl p-6 sm:p-8 shadow-2xl"><div id="calculator-box" class="space-y-6"><div><label class="font-bold text-sm">Window Access:</label><div class="grid grid-cols-2 gap-3 mt-2"><button id="btn-ext" onclick="setServiceType('exterior')" class="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-white border-slate-200 text-slate-700">Exterior Only <span class="block text-xs">$8/pane</span></button><button id="btn-both" onclick="setServiceType('both')" class="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-brand-900 border-brand-900 text-white">Interior+Exterior <span class="block text-xs">$13/pane</span></button></div></div><div><div class="flex justify-between"><label class="font-bold text-sm">Number of Panes:</label><span id="window-counter-badge" class="bg-brand-900 px-3 py-1 rounded-full text-sm font-black">15 Panes</span></div><input id="window-range" type="range" min="5" max="100" value="15" oninput="updateWindowCount(this.value)" class="w-full h-2 bg-brand-500 rounded-lg accent-white mt-2"/><div class="flex justify-between text-[10px] mt-1"><span>5</span><span>50</span><span>100+</span></div></div><div><label class="font-bold text-sm">Add‑ons:</label><div class="space-y-2 mt-2"><label class="flex items-center p-3 bg-brand-700 rounded-xl"><input id="addon-screens" type="checkbox" onchange="toggleScreens(this.checked)" class="mr-3 h-5 w-5"/><div><span class="font-bold text-sm">Screen Deep Washing</span><span class="block text-xs">+$3/screen</span></div></label><label class="flex items-center p-3 bg-brand-700 rounded-xl"><input id="addon-tracks" type="checkbox" onchange="toggleTracks(this.checked)" class="mr-3 h-5 w-5"/><div><span class="font-bold text-sm">Track Detail Cleaning</span><span class="block text-xs">+$5/track</span></div></label></div></div><div><label class="font-bold text-sm">Clean Frequency:</label><div class="grid grid-cols-3 gap-2 mt-2"><button id="freq-one-off" onclick="setFrequency('one-off')" class="py-2 px-3 rounded-xl font-bold text-xs border bg-brand-900 border-brand-900 text-white">One-Off <span class="block text-[10px]">Standard</span></button><button id="freq-quarterly" onclick="setFrequency('quarterly')" class="py-2 px-3 rounded-xl font-bold text-xs border bg-white border-slate-200 text-slate-700">Every 3 Mo <span class="block text-[10px] text-yellow-600">Save 15%</span></button><button id="freq-monthly" onclick="setFrequency('monthly')" class="py-2 px-3 rounded-xl font-bold text-xs border bg-white border-slate-200 text-slate-700">Monthly <span class="block text-[10px] text-yellow-600">Save 20%</span></button></div></div><div class="bg-brand-900 rounded-2xl p-6 text-center"><span class="text-xs uppercase text-brand-200">Estimated Investment</span><div class="text-4xl font-black text-sky-300">$<span id="estimate-output-val">195</span><span id="frequency-suffix-label" class="text-xs ml-1">total</span></div><p id="estimate-explanation" class="text-xs text-brand-200 mt-1">15 windows (interior & exterior)</p></div><form id="booking-form" onsubmit="submitEstimateForm(event)" class="space-y-3"><h4 class="font-bold text-sm">Lock in quoted price:</h4><div class="grid sm:grid-cols-2 gap-3"><input id="book-name" type="text" required placeholder="Full Name" class="w-full bg-white text-slate-900 rounded-xl p-3 text-sm"/><input id="book-phone" type="tel" required placeholder="Phone" class="w-full bg-white text-slate-900 rounded-xl p-3 text-sm"/></div><input id="book-email" type="email" required placeholder="Email" class="w-full bg-white text-slate-900 rounded-xl p-3 text-sm"/><button type="submit" class="w-full bg-white text-brand-900 font-extrabold py-4 rounded-xl shadow-lg">Book & Secure Price</button><p class="text-[11px] text-center text-brand-100">No obligation — we'll confirm your date.</p></form></div><div id="success-box" class="hidden text-center py-12 space-y-6"><div class="inline-flex bg-brand-700 p-4 rounded-full"><svg class="h-10 w-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-2xl font-bold">Estimate Locked!</h3><p>Thank you, <span id="summary-client-name">Customer</span>. Your $<span id="summary-price">0</span> quote is secured.</p><div class="bg-brand-700/60 rounded-2xl p-4 text-left text-xs"><p class="font-bold uppercase">Quote summary</p><div class="flex justify-between"><span>Service:</span><span id="summary-service"></span></div><div class="flex justify-between"><span>Windows:</span><span id="summary-windows"></span></div><div class="flex justify-between"><span>Program:</span><span id="summary-frequency"></span></div><div id="summary-addons" class="text-sky-200"></div></div><button onclick="resetCalculationForm()" class="bg-white text-brand-900 font-bold px-6 py-2 rounded-xl">Adjust Quote</button></div></div></div></div></section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="py-20 bg-slate-50"><div class="max-w-7xl mx-auto px-4 text-center"><span class="text-brand-600 text-xs uppercase bg-brand-50 px-3 py-1.5 rounded-full">Real Reviews</span><h2 class="text-3xl font-serif font-bold mt-4">Our Work Speaks For Itself</h2><div class="grid md:grid-cols-3 gap-8 mt-12"><div class="bg-white p-8 rounded-3xl shadow-sm"><div class="text-yellow-400">★★★★★</div><p class="text-slate-600 italic mt-3">"The filtered water system is incredible — no spots at all."</p><div class="border-t mt-4 pt-4 font-bold">Sarah Jenkins</div></div><div class="bg-white p-8 rounded-3xl shadow-sm"><div class="text-yellow-400">★★★★★</div><p class="text-slate-600 italic mt-3">"They detailed my tracks like new. Clearly Better Glass is the real deal."</p><div class="border-t mt-4 pt-4 font-bold">Marcus Rodriguez</div></div><div class="bg-white p-8 rounded-3xl shadow-sm"><div class="text-yellow-400">★★★★★</div><p class="text-slate-600 italic mt-3">"Punctual, responsive, our storefront has never looked better."</p><div class="border-t mt-4 pt-4 font-bold">Emily K.</div></div></div></div></section>
+
+  <!-- MAIN FAQ SECTION -->
+  <section id="faq" class="py-20 bg-white"><div class="max-w-4xl mx-auto px-4"><div class="text-center mb-12"><span class="text-brand-600 text-xs uppercase bg-brand-50 px-3 py-1.5 rounded-full">FAQ</span><h2 class="text-3xl font-black">Common Questions</h2></div><div class="space-y-4"><div class="border rounded-2xl"><button onclick="toggleFaq(1)" class="w-full text-left p-6 flex justify-between font-bold">Do I need to be home?<svg id="faq-arrow-1" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="faq-content-1" class="hidden p-6 border-t text-slate-600 text-sm">No, as long as gates are unlocked and pets secured, we handle exterior.</div></div><div class="border rounded-2xl"><button onclick="toggleFaq(2)" class="w-full text-left p-6 flex justify-between font-bold">Rain after cleaning?<svg id="faq-arrow-2" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="faq-content-2" class="hidden p-6 border-t text-slate-600 text-sm">Rain won't leave spots because we remove all dirt first.</div></div><div class="border rounded-2xl"><button onclick="toggleFaq(3)" class="w-full text-left p-6 flex justify-between font-bold">Late arrival policy?<svg id="faq-arrow-3" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="faq-content-3" class="hidden p-6 border-t text-slate-600 text-sm">We credit $35 per hour late. Punctuality is our promise.</div></div><div class="border rounded-2xl"><button onclick="toggleFaq(4)" class="w-full text-left p-6 flex justify-between font-bold">Do you use chemicals?<svg id="faq-arrow-4" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="faq-content-4" class="hidden p-6 border-t text-slate-600 text-sm">No soaps or detergents — only purified water for a residue‑free finish.</div></div></div></div></section>
+
+  <footer class="max-w-7xl mx-auto px-4 pt-8 border-t flex flex-col sm:flex-row justify-between text-[11px] text-slate-400"><p>© <span id="current-year"></span> Clearly Better Glass™. Licensed, Bonded & Insured.</p><div class="flex space-x-4"><a href="#">Privacy</a><a href="#">Terms</a></div></footer>
+
+  <!-- FLOATING FAQ SIDEBAR BUTTON -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button id="faq-toggle-btn" onclick="toggleFaqSidebar()" class="w-14 h-14 bg-brand-600 hover:bg-brand-700 text-white rounded-full shadow-2xl flex items-center justify-center transition-all">
+      <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- FAQ Sidebar Panel -->
+  <div id="faq-sidebar" class="faq-sidebar fixed top-0 right-0 w-96 h-full bg-white shadow-2xl z-50 flex flex-col border-l border-slate-200">
+    <div class="bg-brand-600 text-white px-5 py-4 flex justify-between items-center">
+      <div><div class="font-bold text-lg">Quick FAQ</div><div class="text-xs text-brand-100">Common questions — click to expand</div></div>
+      <button onclick="toggleFaqSidebar()" class="text-white hover:text-slate-200 p-1"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5 space-y-3 bg-slate-50 faq-sidebar-content">
+      <div class="border rounded-xl bg-white overflow-hidden"><button onclick="toggleSidebarFaq(1)" class="w-full text-left p-4 font-bold text-sm flex justify-between">Do I need to be home?<svg id="s-faq-arrow-1" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="s-faq-content-1" class="hidden p-4 border-t text-xs">No, as long as gates are unlocked and pets secured.</div></div>
+      <div class="border rounded-xl bg-white overflow-hidden"><button onclick="toggleSidebarFaq(2)" class="w-full text-left p-4 font-bold text-sm flex justify-between">Rain after cleaning?<svg id="s-faq-arrow-2" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="s-faq-content-2" class="hidden p-4 border-t text-xs">Rain won't leave spots because we remove all residue.</div></div>
+      <div class="border rounded-xl bg-white overflow-hidden"><button onclick="toggleSidebarFaq(3)" class="w-full text-left p-4 font-bold text-sm flex justify-between">Late credit policy?<svg id="s-faq-arrow-3" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="s-faq-content-3" class="hidden p-4 border-t text-xs">$35 off per hour late. We value your time.</div></div>
+      <div class="border rounded-xl bg-white overflow-hidden"><button onclick="toggleSidebarFaq(4)" class="w-full text-left p-4 font-bold text-sm flex justify-between">Do you clean tracks?<svg id="s-faq-arrow-4" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></button><div id="s-faq-content-4" class="hidden p-4 border-t text-xs">Yes, available as add-on ($5/track).</div></div>
+      <div class="pt-2 text-center text-[10px] text-slate-400">Need more? <button onclick="scrollToSection('faq'); toggleFaqSidebar();" class="text-brand-600 underline">View full FAQ</button></div>
+    </div>
+  </div>
+
+  <script>
+    // Core functions
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    function closePromoBanner(){document.getElementById('promo-banner').style.display='none';}
+    function toggleMobileMenu(){const m=document.getElementById('mobile-menu');m.classList.toggle('hidden');}
+    function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});document.getElementById('mobile-menu')?.classList.add('hidden');}
+    
+    // Calculator logic
+    let serviceType='both',windowCount=15,cleanScreens=false,cleanTracks=false,frequency='one-off';
+    function updateCalculations(){const pp=serviceType==='exterior'?8:13;let base=windowCount*pp+(cleanScreens?windowCount*3:0)+(cleanTracks?windowCount*5:0);let disc=frequency==='monthly'?0.2:frequency==='quarterly'?0.15:0;const final=Math.round(base*(1-disc));document.getElementById('estimate-output-val').innerText=final;document.getElementById('frequency-suffix-label').innerText=frequency==='one-off'?'total':'/ service';document.getElementById('estimate-explanation').innerText=`Calculated for ${windowCount} windows (${serviceType==='exterior'?'exterior only':'interior & exterior'}).`;}
+    function setServiceType(t){serviceType=t;const ex=document.getElementById('btn-ext'),bothB=document.getElementById('btn-both');if(t==='exterior'){ex.className="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-brand-900 border-brand-900 text-white";bothB.className="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-white border-slate-200 text-slate-700";}else{ex.className="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-white border-slate-200 text-slate-700";bothB.className="py-3 px-4 rounded-xl font-bold text-sm border-2 bg-brand-900 border-brand-900 text-white";}updateCalculations();}
+    function updateWindowCount(v){windowCount=parseInt(v);document.getElementById('window-counter-badge').innerText=v+' Panes';updateCalculations();}
+    function toggleScreens(c){cleanScreens=c;updateCalculations();}
+    function toggleTracks(c){cleanTracks=c;updateCalculations();}
+    function setFrequency(f){frequency=f;['one-off','quarterly','monthly'].forEach(btn=>{const el=document.getElementById(`freq-${btn}`);if(el)el.className="py-2 px-3 rounded-xl font-bold text-xs border transition bg-white border-slate-200 text-slate-700";});document.getElementById(`freq-${f}`).className="py-2 px-3 rounded-xl font-bold text-xs border transition bg-brand-900 border-brand-900 text-white";updateCalculations();}
+    function submitEstimateForm(e){e.preventDefault();const name=document.getElementById('book-name').value,phone=document.getElementById('book-phone').value,email=document.getElementById('book-email').value;if(!name||!phone||!email){showToastNotification("Please fill all fields.");return;}document.getElementById('summary-client-name').innerText=name;document.getElementById('summary-price').innerText=document.getElementById('estimate-output-val').innerText;document.getElementById('summary-service').innerText=serviceType==='exterior'?'Exterior-Only':'Interior+Exterior';document.getElementById('summary-windows').innerText=`${windowCount} Panes`;document.getElementById('summary-frequency').innerText=frequency.replace('-',' ');const addDiv=document.getElementById('summary-addons');addDiv.innerHTML=(cleanScreens?'<div>✓ Screen Washing</div>':'')+(cleanTracks?'<div>✓ Track Detailing</div>':'');document.getElementById('calculator-box').classList.add('hidden');document.getElementById('success-box').classList.remove('hidden');showToastNotification("Quote saved! We'll contact you.");}
+    function resetCalculationForm(){document.getElementById('book-name').value='';document.getElementById('book-phone').value='';document.getElementById('book-email').value='';setServiceType('both');updateWindowCount(15);document.getElementById('window-range').value=15;document.getElementById('addon-screens').checked=false;document.getElementById('addon-tracks').checked=false;cleanScreens=false;cleanTracks=false;setFrequency('one-off');document.getElementById('success-box').classList.add('hidden');document.getElementById('calculator-box').classList.remove('hidden');}
+    function showToastNotification(msg){const toast=document.getElementById('toast');document.getElementById('toast-message').innerText=msg;toast.classList.remove('hidden');setTimeout(()=>toast.classList.remove('translate-y-10','opacity-0'),10);setTimeout(()=>{toast.classList.add('translate-y-10','opacity-0');setTimeout(()=>toast.classList.add('hidden'),300);},3500);}
+    
+    // FAQ accordion for main page
+    function toggleFaq(idx){for(let i=1;i<=4;i++){document.getElementById(`faq-content-${i}`)?.classList.add('hidden');document.getElementById(`faq-arrow-${i}`)?.classList.remove('rotate-180');}const content=document.getElementById(`faq-content-${idx}`);const arrow=document.getElementById(`faq-arrow-${idx}`);if(content.classList.contains('hidden')){content.classList.remove('hidden');arrow.classList.add('rotate-180');}}
+    
+    // Sidebar FAQ toggle and open/close sidebar
+    function toggleFaqSidebar(){const sidebar=document.getElementById('faq-sidebar');sidebar.classList.toggle('open');}
+    function toggleSidebarFaq(idx){for(let i=1;i<=4;i++){const content=document.getElementById(`s-faq-content-${i}`);const arrow=document.getElementById(`s-faq-arrow-${i}`);if(content){content.classList.add('hidden');arrow?.classList.remove('rotate-180');}}const content=document.getElementById(`s-faq-content-${idx}`);const arrow=document.getElementById(`s-faq-arrow-${idx}`);if(content.classList.contains('hidden')){content.classList.remove('hidden');arrow.classList.add('rotate-180');}else{content.classList.add('hidden');arrow.classList.remove('rotate-180');}}
+    
+    // Initial state
+    setServiceType('both');updateWindowCount(15);setFrequency('one-off');
+  </script>
+</body>
+  </html>
